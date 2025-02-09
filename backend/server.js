@@ -10,13 +10,11 @@ const app = express();
 app.use(express.json()); // allows us to accept JSON data in the req.body
 const PORT = process.env.PORT || 5000;
 
-const __dirname = path.resolve();
+const __dirname = path.dirname(path.resolve());
 
 // routes
 app.use("/api/products", productRoutes);
-app.get("/hello", (req, res) => {
-  res.send("Hello World");
-});
+app.get("/hello", (req, res) => res.send("Hello World"));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/frontend/dist")));

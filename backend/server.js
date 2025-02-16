@@ -15,6 +15,7 @@ const __dirname = path.dirname(path.resolve());
 // routes
 app.use("/api/products", productRoutes);
 app.get("/hello", (req, res) => res.send("Hello World"));
+app.get("/", (req, res) => res.send("Hello World"));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/frontend/dist")));

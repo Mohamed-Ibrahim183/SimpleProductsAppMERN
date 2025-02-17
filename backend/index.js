@@ -24,6 +24,19 @@ app.listen(PORT, () => {
 app.use("/api/products", productRoutes);
 app.get("/hello", (req, res) => res.send("Hello World"));
 app.get("/", (req, res) => res.send("Hello World"));
+// import mongoose from "mongoose";
+import Product from "../models/product.model.js";
+
+const getProducts = async (req, res) => {
+  try {
+    const products = await Product.find({});
+    res.status(200).json({ success: true, data: products });
+  } catch (error) {
+    console.log("error in fetching products:", error.message);
+    res.status(500).json({ success: false, message: "Server Error" });
+  }
+};
+app.get("/products", getProducts);
 
 // if (process.env.NODE_ENV === "production") {
 //   app.use(express.static(path.join(__dirname, "/frontend/dist")));

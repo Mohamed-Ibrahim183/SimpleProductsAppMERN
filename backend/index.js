@@ -9,17 +9,17 @@ import Product from "../models/product.model.js";
 dotenv.config();
 
 const app = express();
+// Enable CORS for all origins
+app.use(cors());
 app.use(express.json()); // allows us to accept JSON data in the req.body
 const PORT = process.env.PORT || 5000;
 
-// Enable CORS for all origins
-app.use(cors());
 app.listen(PORT, () => {
   connectDB();
   console.log("Server started at http://localhost:" + PORT);
 });
 
-const __dirname = path.dirname(path.resolve());
+// const __dirname = path.dirname(path.resolve());
 
 // routes
 app.use("/api/products", productRoutes);
@@ -38,9 +38,9 @@ const getProducts = async (req, res) => {
 };
 app.get("/products", getProducts);
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "/frontend/dist")));
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
-  });
-}
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static(path.join(__dirname, "/frontend/dist")));
+//   app.get("*", (req, res) => {
+//     res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+//   });
+// }
